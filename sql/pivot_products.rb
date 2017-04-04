@@ -40,7 +40,7 @@ end
 
 puts attribute_names.count
 
-CSV.open("products_pivoted.csv", "wb") do |csv|
+CSV.open("products.csv", "wb") do |csv|
 	csv << ["id", "name", "producer", attribute_names].flatten
 	product_id.each.with_index do |id, i|
 		csv << [id, product_names[i], product_producer[i], attributes[i]].flatten

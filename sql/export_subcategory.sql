@@ -6,19 +6,22 @@ SELECT products.id,
                            FROM attributes
                            LEFT JOIN (SELECT *
                                       FROM attribute_values
-                                      WHERE attribute_values.product_id = products.id) AS v 
+                                      WHERE attribute_values.product_id = products.id) AS v
                            ON attributes.id = v.attribute_id
                            ORDER BY attributes.id))
 FROM products
 JOIN subcategories
 ON products.subcategory_id = subcategories.id
-WHERE subcategories.name = 'Mobiltelefon'
+WHERE subcategories.name = 'Diskmaskin'
 ORDER BY products.id;
 
 CREATE VIEW matches_subcategory AS
-SELECT original_id, replacement_id, date_trunc('second', timestamp)
+SELECT original_id, replacement_id, date_trunc('second', timestamp) as timestamp
 FROM matches
-WHERE matches.original_id IN (SELECT id FROM product_subcategory) AND matches.replacement_id IN (SELECT id FROM product_subcategory);
+WHERE matches.original_id IN (SELECT id FROM product_subcategory) AND
+      matches.replacement_id IN (SELECT id FROM product_subcategory) AND
+      matches.original_id <> matches.replacement_id
+ORDER BY timestamp ASC;
 
 CREATE VIEW stock_exchange AS
 SELECT store_product_stock_exchange.aggregate_id,
