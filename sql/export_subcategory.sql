@@ -12,7 +12,7 @@ SELECT products.id,
 FROM products
 JOIN subcategories
 ON products.subcategory_id = subcategories.id
-WHERE subcategories.name = 'Diskmaskin'
+WHERE subcategories.name = 'TV'
 ORDER BY products.id;
 
 CREATE VIEW matches_subcategory AS

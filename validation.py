@@ -1,8 +1,18 @@
-def train_test_split(matches, ratio):
-    return (
-        matches[:round(matches.shape[0] * ratio)],
-        matches[round(matches.shape[0] * ratio):]
-    )
+def train_test_split(matches, ratio, stock_exchange):
+    train = matches[:round(matches.shape[0] * ratio)]
+    train = train.drop_duplicates(['original_id', 'replacement_id'])
+    test = matches[round(matches.shape[0] * ratio):]
+
+    mask = []
+    for _, original, _, date in test.itertuples():
+        stock_products = set(map((lambda x: x.data), stock_exchange[date]))
+        if original not in stock_products:
+            mask.append(original)
+
+    test = test.loc[test['original_id'].isin(mask)]
+    test = test.drop_duplicates(['original_id', 'replacement_id'])
+
+    return train, test
 
 def evaluate_model(test, find_all_matches):
     results = []
