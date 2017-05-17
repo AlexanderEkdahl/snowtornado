@@ -14,7 +14,7 @@
 1. Change category in ```export_subcategory.sql```
 2. Execute ```psql whalewolf < export_subcategory.sql```
 3. Execute ```ruby pivot_products.rb```
-4. Copy to data folder by running ```cp products.csv matches.csv stock_exchange.csv ../data/```
+4. Copy to data folder by running ```mv products.csv matches.csv stock_exchange.csv ../data/```
 
 ## Creating a new database dump
 
