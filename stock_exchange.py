@@ -36,7 +36,11 @@ def create_interval_tree(filename):
                         break
                     else:
                         # print("%s - End interval for %s" % (i, row[1]))
-                        tree[state_date:parse_date(row[2])] = int(state_id)
+                        try:
+                            tree[state_date:parse_date(row[2])] = int(state_id)
+                        except ValueError:
+                            # Null interval where start = end
+                            pass
                         state = "initial"
                 else:
                     tree[state_date:datetime.now()] = int(state_id)
