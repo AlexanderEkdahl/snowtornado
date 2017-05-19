@@ -12,9 +12,11 @@
 ## Exporting a category
 
 1. Change category in ```export_subcategory.sql```
-2. Execute ```psql whalewolf < export_subcategory.sql```
+2. Execute ```psql whalewolf < export_subcategory.sql && ruby pivot_products.rb && mv products.csv matches.csv stock_exchange.csv ../data/```
 3. Execute ```ruby pivot_products.rb```
 4. Copy to data folder by running ```mv products.csv matches.csv stock_exchange.csv ../data/```
+
+Short: psql whalewolf < export_subcategory.sql && ruby pivot_products.rb && mv products.csv matches.csv stock_exchange.csv ../data/
 
 ## Creating a new database dump
 

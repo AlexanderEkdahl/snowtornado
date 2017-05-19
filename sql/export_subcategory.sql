@@ -34,9 +34,9 @@ WHERE store_product_mapping.mapped_to_upptec_product IS NOT null AND store_produ
 ORDER BY aggregate_id, timestamp;
 
 \copy (SELECT name FROM attributes ORDER BY attributes.id) TO 'attributes.csv' DELIMITER ',' CSV
-\copy (SELECT * FROM stock_exchange WHERE product_id IN (SELECT original_id FROM matches_subcategory) OR product_id IN (SELECT replacement_id FROM matches_subcategory)) TO 'stock_exchange.csv' DELIMITER ',' CSV
+\copy (SELECT * FROM stock_exchange) TO 'stock_exchange.csv' DELIMITER ',' CSV
 \copy (SELECT * FROM matches_subcategory) TO 'matches.csv' DELIMITER ',' CSV
-\copy (SELECT * FROM product_subcategory WHERE id IN (SELECT original_id FROM matches_subcategory) OR id IN (SELECT replacement_id FROM matches_subcategory)) TO 'products.csv' DELIMITER ',' CSV
+\copy (SELECT * FROM product_subcategory) TO 'products.csv' DELIMITER ',' CSV
 
 DROP VIEW stock_exchange;
 DROP VIEW matches_subcategory;
